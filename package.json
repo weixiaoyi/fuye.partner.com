@@ -1,0 +1,50 @@
+{
+  "name": "partner.com",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "antd": "^4.3.5",
+    "axios": "^0.19.2",
+    "bip39": "^3.0.2",
+    "crypto-js": "^4.0.0",
+    "current-device": "^0.10.1",
+    "localforage": "^1.7.4",
+    "lodash": "^4.17.15",
+    "mobx": "^5.15.4",
+    "mobx-react": "^6.2.2",
+    "moment": "^2.27.0",
+    "qs": "^6.9.4",
+    "query-string": "^6.13.1",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.2.0",
+    "store": "^2.0.12",
+    "ua-device": "^0.1.10"
+  },
+  "devDependencies": {
+    "customize-cra": "^1.0.0",
+    "node-sass": "^4.14.1",
+    "react-app-rewired": "^2.1.6",
+    "react-scripts": "3.4.1",
+    "@babel/plugin-proposal-decorators": "^7.10.3"
+  },
+  "scripts": {
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
