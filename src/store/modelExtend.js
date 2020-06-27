@@ -109,31 +109,10 @@ export default class ModelExtend {
 
   clearCurrentUser = () => {
     this.commit("rootStore.userStore.userInfo", {});
-    this.commit("rootStore.userStore.userMemberInfo", {});
   };
 
   isLogin = () => {
     return !isEmpty(this.rootStore.userStore.userInfo);
-  };
-
-  isMember = () => {
-    return this.isAllMember() || this.isThemeMember();
-  };
-
-  isThemeMember = () => {
-    if (!this.rootStore.homeStore.selectTheme.name) return false;
-    const themeName = this.rootStore.homeStore.selectTheme.name.replace(
-      ".json",
-      ""
-    );
-    return _.get(
-      this.rootStore.userStore.userMemberInfo,
-      `detail.${themeName}.status`
-    );
-  };
-
-  isAllMember = () => {
-    return _.get(this.rootStore.userStore.userMemberInfo, `detail.all.status`);
   };
 
   getHistory = () => this.rootStore.globalStore.history;

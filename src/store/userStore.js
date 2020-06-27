@@ -7,9 +7,7 @@ import {
   register,
   getUserInfo,
   loginOut,
-  payMember,
-  getUserMemberInfo,
-  getCaptcha
+  getCaptcha,
 } from "../services";
 
 export default class UserStore extends ModelExtend {
@@ -26,21 +24,21 @@ export default class UserStore extends ModelExtend {
   @observable userInfo = localSave.get("userInfo") || {};
   @observable userMemberInfo = {};
 
-  setUserInfo = info => {
+  setUserInfo = (info) => {
     const { accountId, name, ...rest } = info;
     this.commit("userInfo", {
       accountId,
       name,
-      ...rest
+      ...rest,
     });
   };
 
-  login = async payload => {
+  login = async (payload) => {
     const { name, password } = payload;
     const res = await login({
       name,
       password: encryptString(password),
-      domain: this.domain
+      domain: this.domain,
     }).catch(this.handleError);
     if (res && res.code && res.data) {
       this.setUserInfo(res.data);
@@ -49,14 +47,14 @@ export default class UserStore extends ModelExtend {
     }
   };
 
-  register = async payload => {
+  register = async (payload) => {
     const { name, password, captcha } = payload;
     const res = await register({
       name,
       password: encryptString(password),
       userAgent: "pc",
       domain: this.domain,
-      captcha
+      captcha,
     }).catch(this.handleError);
     if (res && res.code && res.data) {
       this.setUserInfo(res.data);
@@ -65,32 +63,11 @@ export default class UserStore extends ModelExtend {
     }
   };
 
-  payMember = async payload => {
-    if (this.isLogin()) {
-      const { name } = payload;
-      const res = await payMember({ dbName: name }).catch(this.handleError);
-      if (res && res.code && res.data) return res.data;
-    }
-  };
-
   getUserInfo = async () => {
     if (this.isLogin()) {
       const res = await getUserInfo().catch(this.handleError);
       if (res && res.code && res.data) {
         this.setUserInfo(res.data);
-        this.dispatch({
-          type: "getUserMemberInfo"
-        });
-        return res.data;
-      }
-    }
-  };
-
-  getUserMemberInfo = async () => {
-    if (this.isLogin()) {
-      const res = await getUserMemberInfo().catch(this.handleError);
-      if (res && res.code && res.data) {
-        this.commit("userMemberInfo", res.data);
         return res.data;
       }
     }
@@ -107,7 +84,7 @@ export default class UserStore extends ModelExtend {
     if (this.isLogin()) {
       this.setUserInfo({});
       this.commit("userMemberInfo", {});
-      loginOut().catch(err => this.handleError(err));
+      loginOut().catch((err) => this.handleError(err));
     }
   };
 }
